@@ -3,6 +3,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AddressBookService {
@@ -20,6 +21,10 @@ public class AddressBookService {
 
     public void deleteById(Long id) {
         addressBookRepository.deleteById(id);
+    }
+
+    public Optional<AddressBook> findById(Long id){
+        return addressBookRepository.findById(id);
     }
 
     // Additional methods like findById or addBuddy can be added as needed

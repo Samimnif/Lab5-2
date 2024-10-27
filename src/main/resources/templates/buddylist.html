@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buddy List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="container">
+    <h1>All Buddies</h1>
+    <form th:action="|/api/addressbook/${addressBookId}/addBuddy|" method="POST">
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="First name" aria-label="First name" name="name">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Phone Number" aria-label="Last name" name="phoneNumber" >
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Address" aria-label="Last name" name="address" >
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">submit</button>
+    </form>
+
+    <br><br>
+    <table class="table table-striped" >
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterate through the list of buddies -->
+        <tr scope="row" th:each="buddy : ${buddies}">
+            <td th:text="${buddy.name}"></td>
+            <td th:text="${buddy.address}"></td>
+            <td th:text="${buddy.phoneNumber}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -46,4 +46,8 @@ public class BuddyInfo {
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
+    public String toSting(){
+        return "Name: "+name + " Address: " + address + " Phone: " + phoneNumber;
+    }
 }

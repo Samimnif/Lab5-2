@@ -4,4 +4,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AddressBookRepository extends CrudRepository<AddressBook, Long> {
+    AddressBook findById(long id);
 }
