@@ -27,5 +27,9 @@ public class AddressBookService {
         return addressBookRepository.findById(id);
     }
 
+    public List<AddressBook> getAllAddress(){
+        return (List<AddressBook>) addressBookRepository.findAll();
+    }
+
     // Additional methods like findById or addBuddy can be added as needed
 }

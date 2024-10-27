@@ -13,18 +13,28 @@ public class AddressBook {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<BuddyInfo> buddies;
 
+    private int totalSize = 0;
 
-    public AddressBook() {
+    private String addressName;
+
+
+    public AddressBook(String name) {
         buddies = new ArrayList<>();
+        addressName = name;
+    }
+    public AddressBook(){
+
     }
 
 
     public void addBuddy(BuddyInfo newBuddy) {
         buddies.add(newBuddy);
+        totalSize++;
     }
 
     public void removeBuddy(BuddyInfo buddy) {
         buddies.remove(buddy);
+        totalSize--;
     }
 
     public List<BuddyInfo> getBuddies() {
@@ -39,4 +49,19 @@ public class AddressBook {
         return id;
     }
 
+    public void setTotalSize(int totalSize) {
+        this.totalSize = totalSize;
+    }
+
+    public void setAddressName(String addressName) {
+        this.addressName = addressName;
+    }
+
+    public int getTotalSize() {
+        return totalSize;
+    }
+
+    public String getAddressName() {
+        return addressName;
+    }
 }

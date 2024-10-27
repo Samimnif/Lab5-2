@@ -15,8 +15,9 @@ public class AddressBookWebController {
     private AddressBookService addressBookService;
 
     @GetMapping("/")
-    public void listAddress(){
-
+    public String listAddress(Model model){
+        model.addAttribute("addresses", addressBookService.getAllAddress());
+        return "address";
     }
 
     @GetMapping("/{id}/buddies")

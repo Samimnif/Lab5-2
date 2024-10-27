@@ -21,12 +21,9 @@ public class AddressBookController {
     }
 
     @PostMapping
-    public AddressBook createAddressBook() { //@RequestBody AddressBook addressBook
-//        System.out.println("Adding: "+addressBook);
-//        AddressBook savedAddressBook = addressBookService.save(addressBook);
-//        System.out.println(savedAddressBook);
-//        System.out.println(addressBook.getBuddies());
-        return addressBookService.save(new AddressBook());
+    public RedirectView createAddressBook(@RequestBody String name) { //@RequestBody AddressBook addressBook
+        addressBookService.save(new AddressBook(name));
+        return new RedirectView("/addressbook/");
     }
 
     @DeleteMapping("/{id}")
