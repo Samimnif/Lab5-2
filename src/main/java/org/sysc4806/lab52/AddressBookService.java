@@ -2,6 +2,8 @@ package org.sysc4806.lab52;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 @Service
 public class AddressBookService {
 
@@ -12,8 +14,8 @@ public class AddressBookService {
         return addressBookRepository.save(addressBook);
     }
 
-    public Iterable<AddressBook> findAll() {
-        return addressBookRepository.findAll();
+    public List<AddressBook> findAll() {
+        return (List<AddressBook>) addressBookRepository.findAll();
     }
 
     public void deleteById(Long id) {

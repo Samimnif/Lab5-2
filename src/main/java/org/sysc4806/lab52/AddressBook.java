@@ -13,9 +13,11 @@ public class AddressBook {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<BuddyInfo> buddies;
 
+
     public AddressBook() {
         buddies = new ArrayList<>();
     }
+
 
     public void addBuddy(BuddyInfo newBuddy) {
         buddies.add(newBuddy);
