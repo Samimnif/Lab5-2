@@ -20,12 +20,12 @@ public class AddressBookIntegrationTest {
 
     @Test
     public void testCreateAddressBook() {
-        AddressBook addressBook = new AddressBook(); // Assume AddressBook has a default constructor
+        AddressBook addressBook = new AddressBook("Test1"); // Assume AddressBook has a default constructor
         //addressBook.setId(1L);
         addressBook.addBuddy(new BuddyInfo("John Doe", "123 Elm St", "555-1234"));
 
         ResponseEntity<AddressBook> response = restTemplate.postForEntity(
-                "http://localhost:" + port + "/api/addressbook", addressBook, AddressBook.class
+                "http://localhost:" + port + "/api/addressbook/rest", addressBook, AddressBook.class
         );
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

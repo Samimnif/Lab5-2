@@ -29,4 +29,10 @@ public class AddressBookWebController {
         model.addAttribute("addressBookId", id);
         return "buddylist";
     }
+
+    @GetMapping("/spa")
+    public String getSpaTemplate(Model model){
+        model.addAttribute("addresses", addressBookService.getAllAddress());
+        return "spa";
+    }
 }

@@ -21,9 +21,14 @@ public class AddressBookController {
     }
 
     @PostMapping
-    public RedirectView createAddressBook(@RequestBody String name) { //@RequestBody AddressBook addressBook
+    public RedirectView createAddressBook(@RequestParam(value = "name") String name) { //@RequestBody AddressBook addressBook
         addressBookService.save(new AddressBook(name));
         return new RedirectView("/addressbook/");
+    }
+
+    @PostMapping("/rest")
+    public AddressBook createAddressBookRest(@RequestBody AddressBook addressBook) { //@RequestBody AddressBook addressBook
+        return addressBookService.save(addressBook);
     }
 
     @DeleteMapping("/{id}")
@@ -39,6 +44,13 @@ public class AddressBookController {
         System.out.println("Buddies: " + addressBook.getBuddies());
         model.addAttribute("addressBookId", id);
         return "buddylist";
+    }
+
+    @GetMapping("/{id}/getbuddies")
+    public List<BuddyInfo> getBuddiesInAddressBookRest(@PathVariable Long id) {
+        AddressBook addressBook = addressBookService.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("AddressBook not found with id " + id));
+        return addressBook.getBuddies();
     }
 
     @PostMapping("/{id}/addBuddy")

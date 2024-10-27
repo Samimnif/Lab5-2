@@ -25,12 +25,12 @@ public class AddressBookControllerTest {
 
     @Test
     public void testCreateAddressBook() throws Exception {
-        AddressBook addressBook = new AddressBook();
+        AddressBook addressBook = new AddressBook("Test1");
         addressBook.setId(1L);
 
         when(addressBookService.save(any(AddressBook.class))).thenReturn(addressBook);
 
-        mockMvc.perform(post("/api/addressbook")
+        mockMvc.perform(post("/api/addressbook/rest")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(addressBook)))
                 .andExpect(status().isOk())
