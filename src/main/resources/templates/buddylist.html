@@ -19,6 +19,7 @@
                 <input type="text" class="form-control" placeholder="Phone Number" aria-label="Last name" name="phoneNumber" >
             </div>
         </div>
+        <br>
         <div class="row">
             <div class="col">
                 <input type="text" class="form-control" placeholder="Address" aria-label="Last name" name="address" >
@@ -34,6 +35,7 @@
             <th scope="col">Name</th>
             <th scope="col">Address</th>
             <th scope="col">Phone Number</th>
+            <th scope="col">Remove</th>
         </tr>
         </thead>
         <tbody>
@@ -42,9 +44,38 @@
             <td th:text="${buddy.name}"></td>
             <td th:text="${buddy.address}"></td>
             <td th:text="${buddy.phoneNumber}"></td>
+            <td>
+                <form th:action="|/api/addressbook/${addressBookId}/removeBuddy/${buddy.id}|" method="POST" >
+                    <button class="btn btn-danger" type="submit">Remove Buddy</button>
+                </form>
+
+            </td>
         </tr>
         </tbody>
     </table>
 </div>
+<script>
+    $(document).ready(function() {
+        // Event listener for the "View Buddies" button
+        $(".remove-buddies-btn").on("click", function() {
+            const buddyId = $(this).data("id"); // Get the ID from the data attribute
+            const addressID = $(this).data("aid");
+            removeBuddy(buddyId, addressID);
+        });
+
+        // Function to fetch buddies and update the buddies list
+        function removeBuddy(buddyId, addressId) {
+            $.ajax({
+                url: `/api/addressbook/${addressId}/removeBuddy/${buddyId}`,
+                type: 'GET',
+                dataType: 'json',
+                success: "200",
+                error: function(xhr, status, error) {
+                    console.error("Error fetching buddies:", error);
+                }
+            });
+        }
+    });
+</script>
 </body>
 </html>

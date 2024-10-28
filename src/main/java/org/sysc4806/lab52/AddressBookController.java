@@ -14,6 +14,9 @@ public class AddressBookController {
     @Autowired
     private AddressBookService addressBookService;
 
+    @Autowired
+    private BuddyInfoService buddyInfoService;
+
     @GetMapping
     public List<AddressBook> getAllAddressBooks() {
         System.out.println("Find All: "+addressBookService.findAll());
@@ -61,6 +64,16 @@ public class AddressBookController {
         AddressBook addressBook = addressBookService.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("AddressBook not found with id " + id));
         addressBook.addBuddy(newBuddy);
+        addressBookService.save(addressBook);
+        return new RedirectView("/addressbook/" + id + "/buddies");
+    }
+
+    @PostMapping("/{id}/removeBuddy/{bid}")
+    public RedirectView removeBuddy(@PathVariable Long id, @PathVariable Long bid){
+        AddressBook addressBook = addressBookService.findById(id).orElseThrow(() -> new ResourceNotFoundException("AddressBook not found with id " + id));
+        List<BuddyInfo> buddies = addressBook.getBuddies();
+        BuddyInfo removeB = buddyInfoService.findById(bid).orElseThrow(() -> new ResourceNotFoundException("AddressBook not found with id " + bid));
+        addressBook.removeBuddy(removeB);
         addressBookService.save(addressBook);
         return new RedirectView("/addressbook/" + id + "/buddies");
     }

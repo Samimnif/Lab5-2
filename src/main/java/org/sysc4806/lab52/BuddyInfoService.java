@@ -2,6 +2,8 @@ package org.sysc4806.lab52;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 @Service
 public class BuddyInfoService {
 
@@ -18,6 +20,10 @@ public class BuddyInfoService {
 
     public void deleteById(Long id) {
         buddyInfoRepository.deleteById(id);
+    }
+
+    public Optional<BuddyInfo> findById(Long id){
+        return buddyInfoRepository.findById(id);
     }
 }
 
